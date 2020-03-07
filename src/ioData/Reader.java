@@ -6,6 +6,7 @@ import models.InputNeuronsPair;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,9 +20,9 @@ public class Reader {
         List<InputNeuronsPair> inputNeuronsPairList = new ArrayList<>();
 
         while (scanner.hasNextLine()) {
-            String[] content = scanner.nextLine().split(",");
-            InputNeuron XCoordinateNeuron = new InputNeuron(Integer.parseInt(content[0]), Integer.parseInt(content[2]));
-            InputNeuron YCoordinateNeuron = new InputNeuron(Integer.parseInt(content[1]), Integer.parseInt(content[2]));
+            List<String> content = Arrays.asList(scanner.nextLine().split(","));
+            InputNeuron XCoordinateNeuron = new InputNeuron(Integer.parseInt(content.get(0)), Integer.parseInt(content.get(2)));
+            InputNeuron YCoordinateNeuron = new InputNeuron(Integer.parseInt(content.get(1)), Integer.parseInt(content.get(2)));
             InputNeuronsPair inputNeuronsPair = new InputNeuronsPair(XCoordinateNeuron, YCoordinateNeuron);
             inputNeuronsPairList.add(inputNeuronsPair);
         }
