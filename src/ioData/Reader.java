@@ -21,9 +21,9 @@ public class Reader {
 
         while (scanner.hasNextLine()) {
             List<String> content = Arrays.asList(scanner.nextLine().split(","));
-            InputNeuron XCoordinateNeuron = new InputNeuron(Integer.parseInt(content.get(0)), Integer.parseInt(content.get(2)));
-            InputNeuron YCoordinateNeuron = new InputNeuron(Integer.parseInt(content.get(1)), Integer.parseInt(content.get(2)));
-            InputNeuronsPair inputNeuronsPair = new InputNeuronsPair(XCoordinateNeuron, YCoordinateNeuron);
+            InputNeuron XCoordinateNeuron = new InputNeuron(Integer.parseInt(content.get(0)));
+            InputNeuron YCoordinateNeuron = new InputNeuron(Integer.parseInt(content.get(1)));
+            InputNeuronsPair inputNeuronsPair = new InputNeuronsPair(XCoordinateNeuron, YCoordinateNeuron, Integer.parseInt(content.get(2)));
             inputNeuronsPairList.add(inputNeuronsPair);
         }
         scanner.close();

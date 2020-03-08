@@ -30,9 +30,9 @@ public class SimplePerceptron {
         return value >= 0 ? 1 : -1;
     }
 
-    private void updateWeights(InputNeuron XCoordinateNeuron, InputNeuron YCoordinateNeuron) {
-        outputNeuron.setFirstNeuronWeight(outputNeuron.getFirstNeuronWeight() + learningRate*XCoordinateNeuron.getExpectedResponse()*XCoordinateNeuron.getValue());
-        outputNeuron.setSecondNeuronWeight(outputNeuron.getSecondNeuronWeight() + learningRate*YCoordinateNeuron.getExpectedResponse()*YCoordinateNeuron.getValue());
+    private void updateWeights(InputNeuron XCoordinateNeuron, InputNeuron YCoordinateNeuron, int expectedResponse) {
+        outputNeuron.setFirstNeuronWeight(outputNeuron.getFirstNeuronWeight() + learningRate*expectedResponse*XCoordinateNeuron.getValue());
+        outputNeuron.setSecondNeuronWeight(outputNeuron.getSecondNeuronWeight() + learningRate*expectedResponse*YCoordinateNeuron.getValue());
     }
 
     private void updateBias(int expectedResponse) {
@@ -58,13 +58,12 @@ public class SimplePerceptron {
                 activationFunctionValue = bipolarStep(yIn);
 
                 // Checks whether the result of the activation function is not as expected
-                if (activationFunctionValue != inputNeuronsPairList.getXCoordinateNeuron().getExpectedResponse() ||
-                        activationFunctionValue != inputNeuronsPairList.getYCoordinateNeuron().getExpectedResponse()) {
+                if (activationFunctionValue != inputNeuronsPairList.getExpectedResponse()) {
 
                     // As it is not the expected value, update the weights
                     hasAnyWeightChanged = true;
-                    updateWeights(inputNeuronsPairList.getXCoordinateNeuron(), inputNeuronsPairList.getYCoordinateNeuron());
-                    updateBias(inputNeuronsPairList.getXCoordinateNeuron().getExpectedResponse());
+                    updateWeights(inputNeuronsPairList.getXCoordinateNeuron(), inputNeuronsPairList.getYCoordinateNeuron(), inputNeuronsPairList.getExpectedResponse());
+                    updateBias(inputNeuronsPairList.getExpectedResponse());
                 }
             }
         }
