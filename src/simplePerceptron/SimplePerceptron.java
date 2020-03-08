@@ -26,7 +26,7 @@ public class SimplePerceptron {
                 + (outputNeuron.getSecondNeuronWeight()*YCoordinateNeuron.getValue());
     }
 
-    private int bipolarStep(double value) {
+    private int bipolarStepFunction(double value) {
         return value >= 0 ? 1 : -1;
     }
 
@@ -41,7 +41,6 @@ public class SimplePerceptron {
 
     public OutputNeuron run() {
         boolean hasAnyWeightChanged = true;
-        int activationFunctionValue;
         double yIn;
 
         // While there are changes in weights, continue in the loop until you find weights that satisfy the problem
@@ -54,11 +53,8 @@ public class SimplePerceptron {
                 // Calculate y_in
                 yIn = calculateY_in(inputNeuronsPairList.getXCoordinateNeuron(), inputNeuronsPairList.getYCoordinateNeuron());
 
-                // Computes the value in the activation function
-                activationFunctionValue = bipolarStep(yIn);
-
                 // Checks whether the result of the activation function is not as expected
-                if (activationFunctionValue != inputNeuronsPairList.getExpectedResponse()) {
+                if (bipolarStepFunction(yIn) != inputNeuronsPairList.getExpectedResponse()) {
 
                     // As it is not the expected value, update the weights
                     hasAnyWeightChanged = true;
